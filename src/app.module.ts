@@ -1,13 +1,11 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TaskScheduleModule } from './task-schedule/task-schedule.module';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
-  imports: [ScheduleModule.forRoot(), forwardRef(() => TaskScheduleModule)],
-  controllers: [AppController],
-  providers: [AppService],
-  exports: [AppService],
+  imports: [ScheduleModule.forRoot(), JobsModule],
+  controllers: [],
+  providers: [],
+  exports: [],
 })
 export class AppModule {}

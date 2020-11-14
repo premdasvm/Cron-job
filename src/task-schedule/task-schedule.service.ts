@@ -2,14 +2,13 @@ import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 
 import { CronJob } from 'cron';
-import { AppService } from 'src/app.service';
+import { JobsService } from 'src/jobs/jobs.service';
 
 @Injectable()
 export class TaskScheduleService {
   constructor(
-    @Inject(forwardRef(() => AppService))
     private schedulerRegistry: SchedulerRegistry,
-    private appService: AppService,
+    private jobService: JobsService,
   ) {}
   private readonly logger = new Logger(TaskScheduleService.name);
 
@@ -29,7 +28,7 @@ export class TaskScheduleService {
 
     const job = new CronJob(ScheduledDate, () => {
       this.logger.warn(`Job ${name} Executed`);
-      this.appService.scheduled();
+      this.jobService.schedule();
     });
 
     this.schedulerRegistry.addCronJob(name, job);

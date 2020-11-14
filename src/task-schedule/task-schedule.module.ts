@@ -1,9 +1,9 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { AppModule } from 'src/app.module';
+import { JobsModule } from 'src/jobs/jobs.module';
 import { TaskScheduleService } from './task-schedule.service';
 
 @Module({
-  imports: [forwardRef(() => AppModule)],
+  imports: [forwardRef(() => JobsModule)],
   providers: [TaskScheduleService],
   exports: [TaskScheduleService],
 })
