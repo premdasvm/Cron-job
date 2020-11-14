@@ -16,16 +16,27 @@ export class AppController {
 
   @Get('start')
   startSchedule() {
-    return this.taskService.handleCron();
+    return this.taskService.addCronJob('test', {
+      year: 2020,
+      month: 10,
+      day: 13,
+      hour: 14,
+      min: 19,
+    });
   }
 
   @Get('stop')
   stopSchedule() {
-    //
+    // return this.taskService.handleCron();
   }
 
   @Get('delete')
   deleteSchedule() {
-    //
+    return this.taskService.deleteCron('deleteCron');
+  }
+
+  @Get('view')
+  viewSchedule() {
+    return this.taskService.viewDetails('test');
   }
 }
